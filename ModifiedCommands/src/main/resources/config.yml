@@ -1,0 +1,79 @@
+# Version of the config file. Do not change this.
+version: 1
+
+# Enables Factions territory support for commands.
+factions: true
+
+# This message is displayed when the player has successfully paid for a command. Set to '' to display nothing.
+price-success-message: '&ePaid for the command with &d$%m&e'
+
+# This message is displayed when the player could not afford a command. Set to '' to display nothing.
+price-failed-mesage: '&cYou cannot afford this command as it costs &b$%m&c!'
+
+# This message is displayed when the player is on a command cooldown. Set to '' to display nothing.
+cooldown-message: '&eWait &d%t seconds&e before executing &2%c&e'
+
+warmup-start-message: '&eStarting &d%t second&e warmup for &2%c'
+
+# This message is displayed when the player repeats a warming up command. Set to '' to display nothing.
+warmup-double-message: '&cAlready waiting for a command warmup!'
+
+# This message is displayed when the player moves or is hit under a warmup. Set to '' to display nothing.
+warmup-failed-message: '&cFailed to execute the command as you moved!'
+
+# This message is displayed when the player executes a command in a disallowed territory. Set to '' to display nothing.
+faction-message: '&cCannot execute this command within this faction territory!'
+
+# All modified commands should be listed here. Please take some time to learn RegEx before using.
+commands:
+- regex: '/(e|)home(| .*)'
+
+  # Priority at which this should be registered. Supports highest, high, normal, low, lowest, monitor
+  priority: normal
+
+  # %0 = The command e.g. "/home base" will be "home".
+  # %<any number> = Any argument e.g. %1 of "/home base" will be "base".
+  # %<any number>+ = Everything after this argument e.g. %1+ of "/bcast Hello everyone" will be "Hello everyone".
+  alias: '/home %1+'
+
+  # Amount of money the player has to pay in order to execute the command.
+  price: 5.00
+
+  # Amount of time (in seconds) to prevent the user from typing this command again.
+  cooldown: 1
+
+  # Amount of time (in seconds) to wait before the command warmups up. Cancels if the player moves or takes damage.
+  warmup: 2
+
+  # Permission required to execute the command.
+  permission: 'an.awesome.permission'
+
+  # This message is displayed if the player does not have permission.
+  permission-message: '&cYou do not have permission! (Tell whoevers in charge to configure ModifiedCommands)'
+
+  # This message is displayed once the command has been successfully sent.
+  message: '&6Teleporting...'
+
+  # Factions that the player is allowed to execute this command in.
+  factions:
+    # Available relations: Leader, Officer, Member, Recruit, Ally, Truce, Neutral, Enemy
+    - Rel:Truce
+    - Rel:Ally
+    - Rel:Recruit
+    - Rel:Member
+    - Rel:Officer
+    - Rel:Leader
+    - SafeZone
+    - WarZone
+    - Wilderness
+
+- regex: '/wild(|erness)(| .*)'
+  priority: normal
+  warmup: 2
+  cooldown: 300
+
+- regex: '/super secret command .*'
+  priority: high
+  alias: '/me %3+'
+  message: '&eWow you found a &dsecret&e command!'
+  warmup: 1

@@ -1,0 +1,18 @@
+name: ${project.artifactId}
+main: org.originmc.mcommands.ModifiedCommands
+author: Sudzzy
+version: ${project.version}
+description: ${project.description}
+softdepend: [Factions]
+commands:
+  mcreload:
+    aliases: [modifiedcommandsreload, mcommandsreload]
+    description: Reload ModifiedCommands config
+    permission: mcommands.reload
+    permission-message: '§cYou do not have permission to use that command.'
+permissions:
+  mcommands.reload: {default: op}
+  mcommands.bypass.cooldowns: {default: op}
+  mcommands.bypass.economy: {default: op}
+  mcommands.bypass.territory: {default: op}
+  mcommands.bypass.warmups: {default: op}
