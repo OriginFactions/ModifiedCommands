@@ -74,7 +74,7 @@ public final class PlayerListener implements Listener {
         }
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
     public void lowestCommandPreProcess(PlayerCommandPreprocessEvent event) {
         for (String regex : plugin.getSettings().getLowest().keySet()) {
             if (event.getMessage().toLowerCase().matches(regex.toLowerCase())) {
