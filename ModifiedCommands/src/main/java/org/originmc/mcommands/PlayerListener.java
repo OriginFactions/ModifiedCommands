@@ -162,15 +162,20 @@ public final class PlayerListener implements Listener {
         String command = event.getMessage();
         String regex = modifier.getRegex();
         if (modifier.getAlias() != null) {
+            Map<String, String> replacements = new HashMap<>();
             String[] args = command.split(" ");
             args[0] = args[0].substring(1);
 
             for (int c = 0; c < args.length; c++) {
-                command = command.replace("%" + c + "+", StringUtils.join(Arrays.copyOfRange(args, c, args.length), " "));
+                if (!modifier.getAlias().contains("%" + c)) continue;
+                replacements.put("%" + c, args[c]);
+                replacements.put("%" + c + "+", StringUtils.join(Arrays.copyOfRange(args, c, args.length), " "));
             }
 
-            for (int c = 0; c < args.length; c++) {
-                command = command.replaceAll("%" + c, args[c]);
+            command = modifier.getAlias();
+
+            for (String replacement : replacements.keySet()) {
+                command = command.replace(replacement, replacements.get(replacement));
             }
 
             event.setMessage(command);
