@@ -207,11 +207,11 @@ public final class PlayerListener implements Listener {
         int cooldown = modifier.getCooldown();
         if (cooldown > 0 && !player.hasPermission(PERMISSION_COOLDOWN)) {
             // Deny the command if player is on a cooldown
-            long remaining = cooldown - ((System.currentTimeMillis() - plugin.getCooldown(uuid, regex)) / 1000L);
+            int remaining = (int) (cooldown - ((System.currentTimeMillis() - plugin.getCooldown(uuid, regex)) / 1000L));
 
             if (remaining > 0L) {
                 player.sendMessage(plugin.getSettings().getCooldownMessage()
-                        .replace("%t", String.valueOf(remaining))
+                        .replace("%t", DurationUtils.format(remaining))
                         .replace("%c", command));
                 event.setCancelled(true);
                 return;
@@ -226,7 +226,7 @@ public final class PlayerListener implements Listener {
             } else {
                 // Send player a message that the warmup is starting
                 player.sendMessage(plugin.getSettings().getWarmupStartMessage()
-                        .replace("%t", "" + modifier.getWarmup())
+                        .replace("%t", "" + DurationUtils.format(modifier.getWarmup()))
                         .replace("%c", command));
 
                 // Start the warmup for the player

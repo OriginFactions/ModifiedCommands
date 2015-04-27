@@ -11,10 +11,10 @@ price-success-message: '&ePaid for the command with &d$%m&e'
 price-failed-mesage: '&cYou cannot afford this command as it costs &b$%m&c!'
 
 # This message is displayed when the player is on a command cooldown.
-cooldown-message: '&eWait &d%t seconds&e before executing &2%c&e'
+cooldown-message: '&eWait &d%t&e before executing &2%c'
 
 # This message is displayed when the player has started a command warmup.
-warmup-start-message: '&eStarting &d%t second&e warmup for &2%c'
+warmup-start-message: '&eExecuting &2%c&e in &d%t'
 
 # This message is displayed when the player repeats a warming up command.
 warmup-double-message: '&cAlready waiting for a command warmup!'
