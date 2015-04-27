@@ -4,24 +4,25 @@ version: 1
 # Enables Factions territory support for commands.
 factions: true
 
-# This message is displayed when the player has successfully paid for a command. Set to '' to display nothing.
+# This message is displayed when the player has successfully paid for a command. Set messages to '' to display nothing.
 price-success-message: '&ePaid for the command with &d$%m&e'
 
-# This message is displayed when the player could not afford a command. Set to '' to display nothing.
+# This message is displayed when the player could not afford a command.
 price-failed-mesage: '&cYou cannot afford this command as it costs &b$%m&c!'
 
-# This message is displayed when the player is on a command cooldown. Set to '' to display nothing.
+# This message is displayed when the player is on a command cooldown.
 cooldown-message: '&eWait &d%t seconds&e before executing &2%c&e'
 
+# This message is displayed when the player has started a command warmup.
 warmup-start-message: '&eStarting &d%t second&e warmup for &2%c'
 
-# This message is displayed when the player repeats a warming up command. Set to '' to display nothing.
+# This message is displayed when the player repeats a warming up command.
 warmup-double-message: '&cAlready waiting for a command warmup!'
 
-# This message is displayed when the player moves or is hit under a warmup. Set to '' to display nothing.
+# This message is displayed when the player moves or is hit under a warmup.
 warmup-failed-message: '&cFailed to execute the command as you moved!'
 
-# This message is displayed when the player executes a command in a disallowed territory. Set to '' to display nothing.
+# This message is displayed when the player executes a command in a disallowed territory.
 faction-message: '&cCannot execute this command within this faction territory!'
 
 # All modified commands should be listed here. Please take some time to learn RegEx before using.
