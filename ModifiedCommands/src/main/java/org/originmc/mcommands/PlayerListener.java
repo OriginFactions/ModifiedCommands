@@ -238,9 +238,8 @@ public final class PlayerListener implements Listener {
         }
 
         // Start the command cooldown
-        if (!handleCooldown(player, modifier, command)) {
-            event.setCancelled(true);
-            return;
+        if (cooldown > 0 && !player.hasPermission(PERMISSION_COOLDOWN)) {
+            plugin.setCooldown(uuid, regex);
         }
 
         // Bill the player if the command has a price
@@ -252,29 +251,6 @@ public final class PlayerListener implements Listener {
         if (modifier.getMessage() != null && !modifier.getMessage().isEmpty()) {
             player.sendMessage(modifier.getMessage());
         }
-    }
-
-    public boolean handleCooldown(Player player, Modifier modifier, String command) {
-        // Check if the command has a cooldown and if player has permission
-        String regex = modifier.getRegex();
-        UUID uuid = player.getUniqueId();
-        int cooldown = modifier.getCooldown();
-        if (cooldown > 0 && !player.hasPermission(PERMISSION_COOLDOWN)) {
-            // Deny the command if player is on a cooldown
-            long remaining = cooldown - ((System.currentTimeMillis() - plugin.getCooldown(uuid, regex)) / 1000L);
-
-            if (remaining > 0L) {
-                player.sendMessage(plugin.getSettings().getCooldownMessage()
-                        .replace("%t", String.valueOf(remaining))
-                        .replace("%c", command));
-                return false;
-            }
-
-            // Give the player a cooldown for this command
-            plugin.setCooldown(uuid, regex);
-        }
-
-        return true;
     }
 
     public boolean billPlayer(Player player, double price) {
