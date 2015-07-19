@@ -1,9 +1,9 @@
-package org.originmc.mcommands.factions.v2_6;
+package org.originmc.mcommands.factions.v2_8;
 
 import com.massivecraft.factions.Rel;
-import com.massivecraft.factions.entity.BoardColls;
+import com.massivecraft.factions.entity.BoardColl;
 import com.massivecraft.factions.entity.Faction;
-import com.massivecraft.factions.entity.UPlayer;
+import com.massivecraft.factions.entity.MPlayer;
 import com.massivecraft.massivecore.ps.PS;
 import org.bukkit.entity.Player;
 import org.originmc.mcommands.factions.api.FactionsHelper;
@@ -13,10 +13,10 @@ import java.util.List;
 public class FactionsHelperImpl implements FactionsHelper {
 
     public boolean isInTerritory(Player player, List<String> factions) {
-        UPlayer uplayer = UPlayer.get(player);
-        PS ps = com.massivecraft.massivecore.ps.PS.valueOf(player.getLocation());
-        Faction faction = BoardColls.get().getFactionAt(ps);
-        Rel rel = uplayer.getRelationTo(faction);
+        MPlayer mplayer = MPlayer.get(player);
+        PS ps = PS.valueOf(player.getLocation());
+        Faction faction = BoardColl.get().getFactionAt(ps);
+        Rel rel = mplayer.getRelationTo(faction);
 
         for (String f : factions) {
             if ((f.equals("Rel:Leader") && rel.equals(Rel.LEADER)) ||

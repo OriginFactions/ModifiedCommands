@@ -23,6 +23,8 @@ public final class PlayerListener implements Listener {
 
     private static final String PERMISSION_ECONOMY = "mcommands.bypass.economy";
 
+    private static final String PERMISSION_TERRITORY = "mcommands.bypass.territory";
+
     private static final String PERMISSION_WARMUP = "mcommands.bypass.warmups";
 
     private final ModifiedCommands plugin;
@@ -195,16 +197,15 @@ public final class PlayerListener implements Listener {
         }
 
         // Deny the command if player is within the specified territories
-        if (!modifier.getFactions().isEmpty()) {
-            if (plugin.getFactionsManager().isInTerritory(player, modifier.getFactions())) {
-                event.setCancelled(true);
+        if (!modifier.getFactions().isEmpty() && !player.hasPermission(PERMISSION_TERRITORY) &&
+                plugin.getFactionsManager().isInTerritory(player, modifier.getFactions())) {
+            event.setCancelled(true);
 
-                String message = plugin.getSettings().getFactionMessage();
-                if (message != null && !message.isEmpty()) {
-                    player.sendMessage(message);
-                }
-                return;
+            String message = plugin.getSettings().getFactionMessage();
+            if (message != null && !message.isEmpty()) {
+                player.sendMessage(message);
             }
+            return;
         }
 
         // Check if the command has a cooldown and if player has permission

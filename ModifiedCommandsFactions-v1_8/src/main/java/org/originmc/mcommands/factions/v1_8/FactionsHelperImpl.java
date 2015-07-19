@@ -9,13 +9,8 @@ import java.util.List;
 
 public class FactionsHelperImpl implements FactionsHelper {
 
-    private static final String PERMISSION_TERRITORY = "mcommands.bypass.territory";
-
     @Override
     public boolean isInTerritory(Player player, List<String> factions) {
-        if (factions.isEmpty()) return true;
-        if (player.hasPermission(PERMISSION_TERRITORY)) return false;
-
         FPlayer fplayer = FPlayers.i.get(player);
         FLocation flocation = new FLocation(player.getLocation());
         Faction faction = Board.getFactionAt(flocation);
